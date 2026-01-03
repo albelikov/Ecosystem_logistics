@@ -1,59 +1,24 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("logistics.service")
+    alias(libs.plugins.kotlin.spring)
 }
 
 dependencies {
-    // Project modules
-    implementation(project(":scm-iam"))
-    implementation(project(":scm-audit"))
-    implementation(project(":scm-data-protection"))
-    implementation(project(":gis-subsystem"))
-    implementation(project(":fms-service"))
-
     // Spring Boot
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-
-    // Scheduling
-    implementation("org.springframework.boot:spring-boot-starter-quartz")
-
-    // Geospatial dependencies
-    implementation("org.locationtech.jts:jts-core:1.19.0")
-    implementation("com.graphhopper:graphhopper:5.0")
-
-    // Documentation
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
-
+    implementation(libs.bundles.spring.web)
+    implementation(libs.spring.boot.starter.data.jpa)
+    
+    // Database
+    implementation(libs.postgresql)
+    
+    // GIS integration for route optimization (minimal)
+    implementation(libs.bundles.gis.bundle.minimal)
+    
+    // Kafka for real-time tracking
+    implementation(libs.spring.kafka)
+    
     // Testing
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.security:spring-security-test")
-    testImplementation("org.mockito:mockito-core")
-    testImplementation("org.mockito:mockito-junit-jupiter")
-    testImplementation("com.h2database:h2")
+    testImplementation(libs.spring.boot.starter.test)
+    testImplementation(libs.testcontainers.postgresql)
 }
 
-application {
-    mainClass.set("com.logi.tms.LogiTmsApplication")
-}
-
-tasks.named("bootJar") {
-    archiveFileName.set("logi-tms-service.jar")
-}
-
-tasks.named("compileKotlin") {
-    kotlinOptions {
-        jvmTarget = "25"
-        freeCompilerArgs = listOf(
-            "-opt-in=kotlin.RequiresOptIn",
-            "-opt-in=kotlin.ExperimentalStdlibApi"
-        )
-    }
-}
-
-springBoot {
-    buildInfo()
-}

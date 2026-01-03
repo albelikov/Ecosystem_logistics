@@ -1,58 +1,21 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("logistics.service")
+    alias(libs.plugins.kotlin.spring)
 }
 
 dependencies {
-    // Project modules
-    implementation(project(":scm-iam"))
-    implementation(project(":scm-audit"))
-    implementation(project(":scm-data-protection"))
-    implementation(project(":wms-service"))
-    implementation(project(":tms-service"))
-
     // Spring Boot
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-
-    // Return processing
-    implementation("org.springframework.boot:spring-boot-starter-state-machine")
-
-    // Quality management
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-
-    // Documentation
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
-
+    implementation(libs.bundles.spring.web)
+    implementation(libs.spring.boot.starter.data.jpa)
+    
+    // Database
+    implementation(libs.postgresql)
+    
+    // Kafka for reverse logistics events
+    implementation(libs.spring.kafka)
+    
     // Testing
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.security:spring-security-test")
-    testImplementation("org.mockito:mockito-core")
-    testImplementation("org.mockito:mockito-junit-jupiter")
-    testImplementation("com.h2database:h2")
+    testImplementation(libs.spring.boot.starter.test)
+    testImplementation(libs.testcontainers.postgresql)
 }
 
-application {
-    mainClass.set("com.logi.reverselogistics.LogiReverseLogisticsApplication")
-}
-
-tasks.named("bootJar") {
-    archiveFileName.set("logi-reverse-logistics.jar")
-}
-
-tasks.named("compileKotlin") {
-    kotlinOptions {
-        jvmTarget = "25"
-        freeCompilerArgs = listOf(
-            "-opt-in=kotlin.RequiresOptIn",
-            "-opt-in=kotlin.ExperimentalStdlibApi"
-        )
-    }
-}
-
-springBoot {
-    buildInfo()
-}

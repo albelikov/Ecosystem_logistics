@@ -1,64 +1,26 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("logistics.service")
+    alias(libs.plugins.kotlin.spring)
 }
 
 dependencies {
-    // Project modules
-    implementation(project(":scm-iam"))
-    implementation(project(":scm-audit"))
-    implementation(project(":scm-data-protection"))
-
     // Spring Boot
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-
-    // Security frameworks
-    implementation("org.springframework.security:spring-security-oauth2-resource-server")
-    implementation("org.springframework.security:spring-security-messaging")
-
-    // Threat detection
-    implementation("com.maxmind.geoip2:geoip2:4.2.0")
-
-    // Rate limiting
-    implementation("com.bucket4j:bucket4j-core:8.7.0")
-
-    // Vulnerability scanning
-    // implementation("org.owasp:dependency-check") // Use separate plugin instead
-
-    // Documentation
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
-
+    implementation(libs.bundles.spring.web)
+    implementation(libs.spring.boot.starter.data.jpa)
+    
+    // Database
+    implementation(libs.postgresql)
+    
+    // Security & Cyber Resilience
+    implementation(libs.bundles.spring.security.bundle)
+    
+    // Monitoring & Incident Management
+    implementation(libs.spring.boot.starter.actuator)
+    implementation(libs.micrometer.core)
+    implementation(libs.micrometer.registry.prometheus)
+    
     // Testing
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.security:spring-security-test")
-    testImplementation("org.mockito:mockito-core")
-    testImplementation("org.mockito:mockito-junit-jupiter")
-    testImplementation("com.h2database:h2")
+    testImplementation(libs.spring.boot.starter.test)
+    testImplementation(libs.testcontainers.postgresql)
 }
 
-application {
-    mainClass.set("com.logi.cyber.LogiCyberResilienceApplication")
-}
-
-tasks.named("bootJar") {
-    archiveFileName.set("logi-cyber-resilience.jar")
-}
-
-tasks.named("compileKotlin") {
-    kotlinOptions {
-        jvmTarget = "25"
-        freeCompilerArgs = listOf(
-            "-opt-in=kotlin.RequiresOptIn",
-            "-opt-in=kotlin.ExperimentalStdlibApi"
-        )
-    }
-}
-
-springBoot {
-    buildInfo()
-}

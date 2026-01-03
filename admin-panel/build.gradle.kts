@@ -1,66 +1,36 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("logistics.service")
+    alias(libs.plugins.kotlin.spring)
 }
 
 dependencies {
-    // Project modules
-    implementation(project(":scm-iam"))
-    implementation(project(":scm-audit"))
-    implementation(project(":scm-data-protection"))
+        // Spring Boot
+        implementation(libs.bundles.spring.web)
+        implementation(libs.spring.boot.starter.data.jpa)
+        implementation(libs.spring.boot.starter.thymeleaf)
+        implementation(libs.spring.boot.starter.webflux) // WebClient for service integration
 
-    // Admin specific
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
-    implementation("org.springframework.boot:spring-boot-starter-websocket")
+        // Database
+        implementation(libs.postgresql)
+        implementation("com.h2database:h2")
 
-    // UI Libraries
-    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
-    implementation("com.github.admin4j:admin-spring-boot-starter:0.4.7")
+        // Security & IAM Integration
+        implementation(libs.bundles.spring.security.bundle)
+        implementation(libs.bundles.jwt.bundle)
 
-    // Webjars for static resources
-    implementation("org.webjars:bootstrap:5.3.3")
-    implementation("org.webjars:jquery:3.7.1")
-    implementation("org.webjars:font-awesome:6.5.2")
+        // Admin & Management Features
+        implementation(libs.spring.boot.starter.actuator)
+        implementation(libs.micrometer.core)
+        implementation(libs.micrometer.registry.prometheus)
 
-    // Chart libraries
-    implementation("org.webjars.npm:chart.js:4.4.1")
+        // WebSocket for real-time updates
+        implementation(libs.spring.boot.starter.websocket)
 
-    // DataTables
-    implementation("org.webjars:datatables:2.1.5")
-    implementation("org.webjars:datatables-bootstrap5:2.0.2")
+        // Integration with other services - отключено для тестового запуска
+        // implementation(libs.spring.kafka)
 
-    // Documentation
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
-
-    // Testing
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.security:spring-security-test")
-    testImplementation("com.h2database:h2")
-    testImplementation("org.mockito:mockito-core")
-    testImplementation("org.mockito:mockito-junit-jupiter")
+        // Testing
+        testImplementation(libs.spring.boot.starter.test)
+        testImplementation(libs.testcontainers.postgresql)
 }
 
-application {
-    mainClass.set("com.logi.admin.LogiAdminApplication")
-}
-
-tasks.named("bootJar") {
-    archiveFileName.set("logi-admin-panel.jar")
-}
-
-tasks.named("compileKotlin") {
-    kotlinOptions {
-        jvmTarget = "25"
-        freeCompilerArgs = listOf(
-            "-opt-in=kotlin.RequiresOptIn",
-            "-opt-in=kotlin.ExperimentalStdlibApi"
-        )
-    }
-}
-
-springBoot {
-    buildInfo()
-}

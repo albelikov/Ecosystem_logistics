@@ -1,63 +1,26 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("logistics.service")
+    alias(libs.plugins.kotlin.spring)
 }
 
 dependencies {
-    // Project modules
-    implementation(project(":scm-iam"))
-    implementation(project(":scm-audit"))
-    implementation(project(":scm-data-protection"))
-    implementation(project(":tms-service"))
-
     // Spring Boot
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-
-    // PDF generation for customs declarations
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-    implementation("com.itextpdf:itext7-core:8.0.5")
-
-    // Electronic document exchange
-    implementation("org.springframework.boot:spring-boot-starter-integration")
-    implementation("org.springframework.integration:spring-integration-xml")
-
-    // Integration with customs APIs
-    implementation("org.springframework.boot:spring-boot-starter-soap")
-    implementation("org.springframework.ws:spring-ws-security")
-
-    // Documentation
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
-
+    implementation(libs.bundles.spring.web)
+    implementation(libs.spring.boot.starter.data.jpa)
+    
+    // Database
+    implementation(libs.postgresql)
+    
+    // EDI/XML Processing (EDIFACT, XML, ACE integration)
+    implementation(libs.bundles.xml.processing)
+    
+    // Security for government integrations
+    implementation(libs.spring.boot.starter.security)
+    implementation(libs.bouncycastle.provider)
+    implementation(libs.bouncycastle.pkix)
+    
     // Testing
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.security:spring-security-test")
-    testImplementation("org.mockito:mockito-core")
-    testImplementation("org.mockito:mockito-junit-jupiter")
-    testImplementation("com.h2database:h2")
+    testImplementation(libs.spring.boot.starter.test)
+    testImplementation(libs.testcontainers.postgresql)
 }
 
-application {
-    mainClass.set("com.logi.customs.LogiCustomsApplication")
-}
-
-tasks.named("bootJar") {
-    archiveFileName.set("logi-customs-service.jar")
-}
-
-tasks.named("compileKotlin") {
-    kotlinOptions {
-        jvmTarget = "25"
-        freeCompilerArgs = listOf(
-            "-opt-in=kotlin.RequiresOptIn",
-            "-opt-in=kotlin.ExperimentalStdlibApi"
-        )
-    }
-}
-
-springBoot {
-    buildInfo()
-}

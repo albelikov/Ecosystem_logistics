@@ -1,65 +1,27 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("logistics.service")
+    alias(libs.plugins.kotlin.spring)
 }
 
 dependencies {
-    // Project modules
-    implementation(project(":scm-iam"))
-    implementation(project(":scm-audit"))
-    implementation(project(":scm-data-protection"))
-    implementation(project(":fms-service"))
-    implementation(project(":tms-service"))
-
     // Spring Boot
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-
-    // AI/ML for autonomous decisions
-    // implementation("org.springframework.boot:spring-boot-starter-ai") // Requires Spring AI
-
-    // Autonomous vehicle protocols
-    implementation("org.eclipse.mqtt:org.eclipse.paho.client.mqttv3:1.2.5")
-
-    // Real-time decision making
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-
-    // Edge computing
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-
-    // Documentation
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
-
+    implementation(libs.bundles.spring.web)
+    implementation(libs.spring.boot.starter.data.jpa)
+    
+    // Database
+    implementation(libs.postgresql)
+    
+    // ROS (Robot Operating System) Integration - временно отключено
+    // implementation(libs.rosjava.core)
+    
+    // IoT & Device Management
+    implementation(libs.paho.mqtt.client)
+    
+    // Kafka for robot command/control
+    implementation(libs.spring.kafka)
+    
     // Testing
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.security:spring-security-test")
-    testImplementation("org.mockito:mockito-core")
-    testImplementation("org.mockito:mockito-junit-jupiter")
-    testImplementation("com.h2database:h2")
+    testImplementation(libs.spring.boot.starter.test)
+    testImplementation(libs.testcontainers.postgresql)
 }
 
-application {
-    mainClass.set("com.logi.autonomous.LogiAutonomousApplication")
-}
-
-tasks.named("bootJar") {
-    archiveFileName.set("logi-autonomous-ops.jar")
-}
-
-tasks.named("compileKotlin") {
-    kotlinOptions {
-        jvmTarget = "25"
-        freeCompilerArgs = listOf(
-            "-opt-in=kotlin.RequiresOptIn",
-            "-opt-in=kotlin.ExperimentalStdlibApi"
-        )
-    }
-}
-
-springBoot {
-    buildInfo()
-}

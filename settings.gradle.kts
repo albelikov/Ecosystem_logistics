@@ -1,35 +1,28 @@
-rootProject.name = "logi"
+rootProject.name = "logistics-ecosystem"
 
-include(
-    "admin-panel",
-    "autonomous-ops",
-    "customs-service",
-    "cyber-resilience",
-    "fms-service",
-    "freight-marketplace",
-    "gis-subsystem",
-    "oms-service",
-    "reverse-logistics",
-    "scm-audit",
-    "scm-data-protection",
-    "scm-iam",
-    "tms-service",
-    "transport-platform",
-    "wms-service",
-    "yms-service"
-)
+// Core & Platform
+include(":transport-platform")
+include(":gis-subsystem")
 
-// Enable parallel resolution
-settingsEvaluated { settings ->
-    settings.pluginManagement {
-        repositories {
-            gradlePluginPortal()
-            mavenCentral()
-            google()
-        }
-    }
-}
+// Logistic Core Services
+include(":oms-service")
+include(":wms-service")
+include(":tms-service")
+include(":fms-service")
+include(":yms-service")
 
-gradle.projectsLoaded {
-    rootProject.buildFileName = 'build.gradle.kts'
-}
+// Specialized & Strategic
+include(":customs-service")
+include(":freight-marketplace")
+include(":autonomous-ops")
+include(":reverse-logistics")
+
+// Security & Compliance (SCM)
+include(":scm-iam")
+include(":scm-data-protection")
+include(":scm-audit")
+include(":cyber-resilience")
+
+// Admin & Management
+include(":admin-panel")
+
