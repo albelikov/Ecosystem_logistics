@@ -27,7 +27,7 @@ spring:
 
 # GraphHopper Configuration
 graphhopper:
-  dataphorization: /data/graphhopper
+  datapath: /data/graphhopper
   defaultvehicle: car
   weighting: fastest
   instructions: true
@@ -39,7 +39,7 @@ logi:
   gis:
     geocoding:
       provider: nominatim
-      api-key: ${GEOCODING_API_KEY}
+      api-key: ${GEOCODING_API_KEY:}
       timeout: 5000
       cache-ttl: 86400
     routing:

@@ -1,9 +1,9 @@
 // Common Gradle configuration for all modules
 plugins {
-    id("org.springframework.boot") version "3.4.0" apply false
-    id("io.spring.dependency-management") version "1.1.6" apply false
-    id("org.jetbrains.kotlin.plugin.spring") version "2.3.0" apply false
-    id("org.jetbrains.kotlin.plugin.jpa") version "2.3.0" apply false
+    id("org.springframework.boot") version "3.2.0" apply false
+    id("io.spring.dependency-management") version "1.1.4" apply false
+    id("org.jetbrains.kotlin.plugin.spring") version "2.0.0" apply false
+    id("org.jetbrains.kotlin.plugin.jpa") version "2.0.0" apply false
     id("com.github.johnrengelman.shadow") version "8.1.1" apply false
 }
 
@@ -40,9 +40,9 @@ subprojects {
 
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:3.4.0")
-            mavenBom("org.jetbrains.kotlin:kotlin-bom:2.3.0")
-            mavenBom("org.springframework.cloud:spring-cloud-dependencies:2024.0.0")
+            mavenBom("org.springframework.boot:spring-boot-dependencies:3.2.0")
+            mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.0")
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:2023.0.0")
         }
     }
 

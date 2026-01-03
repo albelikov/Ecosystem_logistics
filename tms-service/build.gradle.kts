@@ -21,15 +21,12 @@ dependencies {
     // Scheduling
     implementation("org.springframework.boot:spring-boot-starter-quartz")
 
-    // Geospatial
-    implementation("org.postgresql:postgresql:42.7.3")
-    implementation("org.locationtech.jts:jts-core:1.19.0    // Route optimization
-    implementation("com.graphhopper")
-
-:graphhopper:5.0")
+    // Geospatial dependencies
+    implementation("org.locationtech.jts:jts-core:1.19.0")
+    implementation("com.graphhopper:graphhopper:5.0")
 
     // Documentation
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
     // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")

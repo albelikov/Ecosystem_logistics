@@ -19,7 +19,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
     // AI/ML for autonomous decisions
-    implementation("org.springframework.boot:spring-boot-starter-ai")
+    // implementation("org.springframework.boot:spring-boot-starter-ai") // Requires Spring AI
 
     // Autonomous vehicle protocols
     implementation("org.eclipse.mqtt:org.eclipse.paho.client.mqttv3:1.2.5")
@@ -32,7 +32,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
     // Documentation
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
     // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")

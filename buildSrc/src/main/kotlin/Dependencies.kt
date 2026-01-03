@@ -1,35 +1,35 @@
 /**
  * Centralized dependency management for Logi project
- * Kotlin 2.3.0, Gradle 9.2.1, Java 25
+ * Kotlin 2.0.0, Gradle 8.5, Java 25
  */
 
 object Versions {
     // Core
-    const val kotlin = "2.3.0"
-    const val springBoot = "3.4.0"
-    const val springCloud = "2024.0.0"
+    const val kotlin = "2.0.0"
+    const val springBoot = "3.2.0"
+    const val springCloud = "2023.0.0"
 
     // Database
-    const val postgresql = "42.7.3"
-    const val flyway = "10.10.0"
+    const val postgresql = "42.6.0"
+    const val flyway = "9.22.3"
     const val h2 = "2.2.224"
 
     // Redis
-    const val redis = "4.18.0"
+    const val redis = "6.2.13"
 
     // Testing
-    const val testcontainers = "1.19.8"
-    const val mockito = "5.11.0"
-    const val junit = "5.11.0"
+    const val testcontainers = "1.19.3"
+    const val mockito = "5.8.0"
+    const val junit = "5.10.1"
 
     // Utils
     const val snakeyaml = "2.2"
-    const val jackson = "2.17.1"
-    const val log4j = "2.23.1"
-    const val slf4j = "2.0.13"
+    const val jackson = "2.16.0"
+    const val log4j = "2.21.1"
+    const val slf4j = "2.0.9"
 
     // Documentation
-    const val springdoc = "2.5.0"
+    const val springdoc = "2.3.0"
 }
 
 object Kotlin {
@@ -86,7 +86,7 @@ object Testing {
     const val junit = "org.junit.jupiter:junit-jupiter:${Versions.junit}"
     const val mockitoCore = "org.mockito:mockito-core:${Versions.mockito}"
     const val mockitoJunit = "org.mockito:mockito-junit-jupiter:${Versions.mockito}"
-    const val assertj = "org.assertj:assertj-core:3.25.3"
+    const val assertj = "org.assertj:assertj-core:3.24.2"
 }
 
 object Docs {

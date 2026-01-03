@@ -23,13 +23,13 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-websocket")
 
     // Contract management
-    implementation("org.springframework.boot:spring-boot-starter-contract")
+    // implementation("org.springframework.boot:spring-boot-starter-contract") // Requires spring-cloud-contract
 
     // Digital signatures
     implementation("org.springframework.boot:spring-boot-starter-crypto")
 
     // Documentation
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
     // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")

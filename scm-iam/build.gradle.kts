@@ -12,8 +12,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
     // Keycloak integration
-    implementation("org.keycloak:keycloak-spring-boot-starter:24.0.4")
-    implementation("org.keycloak:keycloak-admin-client:24.0.4")
+    implementation("org.keycloak:keycloak-spring-boot-starter:23.0.0")
+    implementation("org.keycloak:keycloak-admin-client:23.0.0")
 
     // JWT
     implementation("io.jsonwebtoken:jjwt-api:0.12.3")
@@ -27,7 +27,7 @@ dependencies {
     implementation(project(":scm-audit"))
 
     // Documentation
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
     // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")

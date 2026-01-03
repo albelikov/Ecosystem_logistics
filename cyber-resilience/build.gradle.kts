@@ -28,10 +28,10 @@ dependencies {
     implementation("com.bucket4j:bucket4j-core:8.7.0")
 
     // Vulnerability scanning
-    implementation("org.owasp:dependency-check:1.0.0")
+    // implementation("org.owasp:dependency-check") // Use separate plugin instead
 
     // Documentation
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
     // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")

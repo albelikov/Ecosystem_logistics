@@ -23,7 +23,7 @@ dependencies {
     implementation("org.eclipse.mqtt:org.eclipse.paho.client.mqttv3:1.2.5")
 
     // Documentation
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
     // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
