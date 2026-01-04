@@ -80,7 +80,7 @@ services:
 
   # MQTT Broker for IoT
   emqx:
-    image: emqx:5.8.9
+    image: docker.io/emqx/emqx:5.8.9
     container_name: logi-emqx
     environment:
       EMQX_DASHBOARD__DEFAULT_USER: admin
