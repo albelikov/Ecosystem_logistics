@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       POSTGRES_DB: logi
     volumes:
-      - postgres_primary_data:/var/lib/postgresql/data
+      - postgres_primary_data:/var/lib/postgresql
       - ./docker/postgres/init-scripts:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
