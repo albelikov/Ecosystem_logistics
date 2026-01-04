@@ -81,7 +81,7 @@ services:
 
   # MQTT Broker for IoT
   emqx:
-    image: emqx:5.3-alpine
+    image: emqx:5.0-alpine
     container_name: logi-emqx
     environment:
       EMQX_DASHBOARD__DEFAULT_USER: admin
