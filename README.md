@@ -7,7 +7,7 @@
 ### Предварительные требования
 
 - **Java 25**
-- **Kotlin 2.3.0**
+- **Kotlin 2.0.0**
 - **Gradle 9.2.1**
 - **PostgreSQL 16**
 - **Redis 7**
@@ -67,8 +67,8 @@ logi/
 
 Платформа построена на принципах микросервисной архитектуры с использованием:
 
-- **Spring Boot 3.4.0** - основной фреймворк
-- **Kotlin 2.3.0** - язык разработки
+- **Spring Boot 3.2.0** - основной фреймворк
+- **Kotlin 2.0.0** - язык разработки
 - **Gradle 9.2.1** - система сборки
 - **PostgreSQL** - основная база данных
 - **Redis** - кэширование и сессии
@@ -124,7 +124,7 @@ logi/
 
 ### gradle.properties
 ```properties
-kotlin.version=2.3.0
+kotlin.version=2.0.0
 org.gradle.jvmargs=-Xmx4096m -XX:MaxMetaspaceSize=1024m
 org.gradle.parallel=true
 org.gradle.caching=true
