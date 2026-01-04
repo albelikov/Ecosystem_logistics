@@ -1,4 +1,3 @@
-version: '3.8'
 
 services:
   # PostgreSQL Database (Version 18)
@@ -81,7 +80,7 @@ services:
 
   # MQTT Broker for IoT
   emqx:
-    image: emqx:5.0-alpine
+    image: emqx:5.8.9
     container_name: logi-emqx
     environment:
       EMQX_DASHBOARD__DEFAULT_USER: admin
