@@ -1,36 +1,41 @@
 plugins {
-    id("logistics.service")
-    alias(libs.plugins.kotlin.spring)
+    kotlin("jvm")
+    kotlin("plugin.spring")
+    kotlin("plugin.jpa")
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+}
+
+// Версия Spring Cloud для Spring Boot 3.2.x
+extra["springCloudVersion"] = "2023.0.0"
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+    }
+}
+
+springBoot {
+    mainClass.set("com.logi.admin.LogiAdminApplicationKt")
 }
 
 dependencies {
-        // Spring Boot
-        implementation(libs.bundles.spring.web)
-        implementation(libs.spring.boot.starter.data.jpa)
-        implementation(libs.spring.boot.starter.thymeleaf)
-        implementation(libs.spring.boot.starter.webflux) // WebClient for service integration
+    // Spring Boot Starters
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
 
-        // Database
-        implementation(libs.postgresql)
-        implementation("com.h2database:h2")
+    // Spring Cloud
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
-        // Security & IAM Integration
-        implementation(libs.bundles.spring.security.bundle)
-        implementation(libs.bundles.jwt.bundle)
-
-        // Admin & Management Features
-        implementation(libs.spring.boot.starter.actuator)
-        implementation(libs.micrometer.core)
-        implementation(libs.micrometer.registry.prometheus)
-
-        // WebSocket for real-time updates
-        implementation(libs.spring.boot.starter.websocket)
-
-        // Integration with other services - отключено для тестового запуска
-        // implementation(libs.spring.kafka)
-
-        // Testing
-        testImplementation(libs.spring.boot.starter.test)
-        testImplementation(libs.testcontainers.postgresql)
+    // Kotlin
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    
+    // Lombok
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
 }
-

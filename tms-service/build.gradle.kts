@@ -1,24 +1,47 @@
 plugins {
-    id("logistics.service")
-    alias(libs.plugins.kotlin.spring)
+    kotlin("jvm")
+    kotlin("plugin.spring")
+    kotlin("plugin.jpa")
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+}
+
+// Версия Spring Cloud для Spring Boot 3.2.x
+extra["springCloudVersion"] = "2023.0.0"
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+    }
+}
+
+springBoot {
+    mainClass.set("com.logi.tms.TmsServiceApplicationKt")
 }
 
 dependencies {
     // Spring Boot
-    implementation(libs.bundles.spring.web)
-    implementation(libs.spring.boot.starter.data.jpa)
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-security")
     
     // Database
-    implementation(libs.postgresql)
+    implementation("org.postgresql:postgresql")
     
-    // GIS integration for route optimization (minimal)
-    implementation(libs.bundles.gis.bundle.minimal)
+    // Spring Cloud
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     
-    // Kafka for real-time tracking
-    implementation(libs.spring.kafka)
+    // Kotlin
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    
+    // Lombok
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
     
     // Testing
-    testImplementation(libs.spring.boot.starter.test)
-    testImplementation(libs.testcontainers.postgresql)
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.testcontainers:postgresql:1.19.3")
 }
-

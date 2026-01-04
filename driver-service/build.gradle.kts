@@ -15,27 +15,19 @@ dependencyManagement {
 }
 
 springBoot {
-    mainClass.set("com.logi.wms.WmsServiceApplicationKt")
+    mainClass.set("com.logi.driver.DriverServiceApplicationKt")
 }
 
 dependencies {
-    // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-security")
     
-    // Database
     implementation("org.postgresql:postgresql")
-    
-    // Kafka for warehouse events
-    implementation("org.springframework.kafka:spring-kafka")
-    
-    // Spring Cloud
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     
-    // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -43,8 +35,6 @@ dependencies {
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     
-    // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.testcontainers:postgresql:1.19.3")
-    testImplementation("org.springframework.kafka:spring-kafka-test")
 }
